@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- namespace 绑定UseDao接口 关于user表的操作都可以写在这里面-->
+<mapper namespace="cn.itcast.dao.UserDao">
+
+    <!-- 向User表中添加数据 -->
+    <insert id="addUser" parameterType="user">
+        INSERT INTO user(id,username,birthday,sex,address)
+        VALUES(#{id},#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+    <!-- 更改User表中的address信息-->
+    <update id="updateUser" parameterType="user">
+        UPDATE USER set username=#{username},sex=#{sex} WHERE id=#{id}
+    </update>
+
+    <!-- 根据id删除表中的一条记录 -->
+    <delete id="delUser" parameterType="int">
+        DELETE from user WHERE id = #{_id}
+    </delete>
+
+    <!-- 查询user中的所有的记录-->
+    <select id="findAll" resultType="user">
+        SELECT * from user
+    </select>
+
+    <!-- 根据username查询记录-->
+    <select id="findUser" parameterType="string" resultType="user">
+        SELECT * from user WHERE username=#{_username}
+    </select>
+</mapper>
